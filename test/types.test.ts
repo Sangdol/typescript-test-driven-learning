@@ -20,4 +20,14 @@ describe("Types", () => {
     expect(<string>any.length).toBe(6);
     expect((any as string).length).toBe(6);
   });
+
+  /**
+   * https://www.typescriptlang.org/docs/handbook/advanced-types.html
+   */
+  it("Advanced Types", () => {
+    const union1: string | number = "abc";
+    const union2: string | number = 1;
+
+    expect(`${union1} ${union2}`).toBe("abc 1");
+  });
 });
