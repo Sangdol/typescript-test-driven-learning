@@ -17,6 +17,25 @@ describe("Basic Types", () => {
     enum Color { Red, Green, Blue }
     const c: Color = Color.Red;
     expect(`${c} ${Color[c]}`).toBe("0 Red");
+    expect(Color["Red"]).toBe(Color.Red);
+    expect(Color[0]).toBe("Red");
+    expect(Color[0]).not.toBe(Color.Red);
+    expect(Color.Red).toBe(0);
+
+    enum StringColor { Red = "RedValue" }
+    const sc: StringColor = StringColor["Red"];
+    expect(sc).toBe(StringColor.Red);
+    expect(StringColor.Red).toBe("RedValue");
+
+    const scValue: StringColor = StringColor["RedValue"];
+    expect(scValue).toBe(undefined);
+
+    const scAny: string = StringColor[<any>"Red"];
+    expect(scAny).toBe("RedValue");
+    expect(scAny).toBe(StringColor.Red);
+
+    const nullSc: StringColor = StringColor["any"];
+    expect(nullSc).toBe(undefined);
   });
 
   it("any", () => {
