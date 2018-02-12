@@ -11,6 +11,7 @@ describe("Class", () => {
     }
 
     expect(new Greeter("world").greet()).toBe("Hello, world");
+    expect(new Greeter("world").greeting).toBe("world");
   });
 
   it("Accessors", () => {
