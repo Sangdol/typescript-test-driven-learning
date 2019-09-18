@@ -12,32 +12,6 @@ describe("Basic Types", () => {
     expect(`${isBoolean} ${n} ${name} ${list} ${tuple}`)
       .toBe("true 10 name 1,2 name,1,true");
   });
-
-  it("Enum", () => {
-    enum Color { Red, Green, Blue }
-    const c: Color = Color.Red;
-    expect(`${c} ${Color[c]}`).toBe("0 Red");
-    expect(Color["Red"]).toBe(Color.Red);
-    expect(Color[0]).toBe("Red");
-    expect(Color[0]).not.toBe(Color.Red);
-    expect(Color.Red).toBe(0);
-
-    enum StringColor { Red = "RedValue" }
-    const sc: StringColor = StringColor["Red"];
-    expect(sc).toBe(StringColor.Red);
-    expect(StringColor.Red).toBe("RedValue");
-
-    const scValue: StringColor = StringColor["RedValue"];
-    expect(scValue).toBe(undefined);
-
-    const scAny: string = StringColor[<any>"Red"];
-    expect(scAny).toBe("RedValue");
-    expect(scAny).toBe(StringColor.Red);
-
-    const nullSc: StringColor = StringColor["any"];
-    expect(nullSc).toBe(undefined);
-  });
-
   it("any", () => {
     const any: any = "string";
     expect(<string>any.length).toBe(6);
