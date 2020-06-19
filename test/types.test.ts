@@ -17,6 +17,26 @@ describe("Basic Types", () => {
     expect(<string>any.length).toBe(6);
     expect((any as string).length).toBe(6);
   });
+
+  it("Array type", () => {
+    function buildArray() {
+      let a = []  // any[]
+      a.push(1)   // number[]
+      a.push('x') // (number | string)[]
+      return a;   // the type is defined and fixed at this point.
+    }
+
+    let myArray = buildArray();
+
+    // It's not possible to know the type of an array.
+    // https://stackoverflow.com/questions/23130292/test-for-array-of-string-type-in-typescript
+    expect(typeof (myArray)).toBe('object');
+    expect(myArray instanceof Array).toBeTruthy();
+
+    // Error 2345: Argument of type 'true' is not
+    // assignable to parameter of type 'string | number'.
+    // myArray.push(true);
+  });
 });
 
 /**
