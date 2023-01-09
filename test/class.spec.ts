@@ -1,3 +1,6 @@
+import { expect } from "chai";
+
+
 describe("Class", () => {
   it("Basic", () => {
     class Greeter {
@@ -10,8 +13,8 @@ describe("Class", () => {
       }
     }
 
-    expect(new Greeter("world").greet()).toBe("Hello, world");
-    expect(new Greeter("world").greeting).toBe("world");
+    expect(new Greeter("world").greet()).to.equal("Hello, world");
+    expect(new Greeter("world").greeting).to.equal("world");
   });
 
   it("Accessors", () => {
@@ -29,6 +32,6 @@ describe("Class", () => {
 
     const p: Person = new Person();
     p.name = "abc";
-    expect(p.name).toBe("abc");
+    expect(p.name).to.equal("abc");
   });
 });

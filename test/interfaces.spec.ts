@@ -1,3 +1,5 @@
+import { expect } from "chai";
+
 describe("interfaces", () => {
   it("Basic", () => {
     interface LabeledValue {
@@ -10,6 +12,6 @@ describe("interfaces", () => {
 
     // No other properties are allowed from TypeScript 1.6
     // https://stackoverflow.com/questions/31816061/why-am-i-getting-an-error-object-literal-may-only-specify-known-properties
-    expect(returnLabel({ label: "hi" })).toBe("hi");
+    expect(returnLabel({label: "hi"})).to.equal("hi");
   });
 });

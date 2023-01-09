@@ -1,21 +1,7 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es6",
-        "noImplicitAny": true,
-        "strictNullChecks": true,
-        "moduleResolution": "node",
-        "sourceMap": true,
-        "outDir": "dist",
-        "baseUrl": ".",
-        "paths": {
-            "*": [
-                "node_modules/*",
-                "src/types/*"
-            ]
-        }
-    },
-    "include": [
-        "src/**/*"
-    ]
+  "compilerOptions": {
+    "strict": true,                                      /* Enable all strict type-checking options. */
+    "noImplicitAny": false,                            /* Enable error reporting for expressions and declarations with an implied `any` type.. */
+    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+  }
 }
