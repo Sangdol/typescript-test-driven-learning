@@ -1,6 +1,7 @@
-import {expect} from "chai";
+import "mocha";
+import { expect } from "chai";
 
-describe("Basic Types", () => {
+describe("Basic Types", function (this: Mocha.Suite) {
   /**
    * https://www.typescriptlang.org/docs/handbook/basic-types.html
    */

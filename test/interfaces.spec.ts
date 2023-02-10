@@ -1,6 +1,7 @@
+import "mocha";
 import { expect } from "chai";
 
-describe("interfaces", () => {
+describe("interfaces", function (this: Mocha.Suite) {
   it("Basic", () => {
     interface LabeledValue {
       label: string;

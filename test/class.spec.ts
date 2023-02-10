@@ -1,7 +1,8 @@
+import "mocha";
 import { expect } from "chai";
 
 
-describe("Class", () => {
+describe("Class", function (this: Mocha.Suite) {
   it("Basic", () => {
     class Greeter {
       greeting: string;
