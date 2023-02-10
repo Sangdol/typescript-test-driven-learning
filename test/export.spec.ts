@@ -1,8 +1,8 @@
-import {expect} from "chai";
+import { expect } from "chai";
 
 import * as math from "../src/export";
-import {add} from "../src/export";
-import {add as Add} from "../src/export";
+import { add } from "../src/export";
+import { add as Add } from "../src/export";
 
 describe("math", () => {
   it("should add", () => {
