@@ -19,12 +19,12 @@ describe("chai", function (this: Mocha.Suite) {
   it("Deep equality", () => {
     // Strict equality
     expect([1, 2, 3]).to.not.equal([1, 2, 3]);
-    expect({a: 1}).to.not.equal({a: 1});
+    expect({ a: 1 }).to.not.equal({ a: 1 });
 
     // Deep equality
     expect([1, 2, 3]).to.deep.equal([1, 2, 3]);
     expect([1, 2, 3]).to.eql([1, 2, 3]);
-    expect({a: 1}).to.deep.equal({a: 1});
+    expect({ a: 1 }).to.deep.equal({ a: 1 });
 
     // Unordered equality
     expect([1, 2, 3]).to.have.members([2, 1, 3]);
@@ -35,17 +35,17 @@ describe("chai", function (this: Mocha.Suite) {
   });
 
   it("Object", () => {
-    expect({a: 1}).to.have.property("a");
-    expect({a: 1}).to.have.property("a", 1);
-    expect({a: 1}).to.have.own.property("a");
-    expect({a: 1}).to.have.own.property("a", 1);
-    expect({a: 1}).to.have.any.keys("a", "b");
-    expect({a: 1}).to.have.all.keys("a");
-    expect({a: 1}).to.include({a: 1});
-    expect({a: 1}).to.deep.include({a: 1});
-    expect({a: 1}).to.include.any.keys("a", "b");
-    expect({a: 1}).to.include.all.keys("a");
-    expect({a: 1}).to.not.be.empty;
+    expect({ a: 1 }).to.have.property("a");
+    expect({ a: 1 }).to.have.property("a", 1);
+    expect({ a: 1 }).to.have.own.property("a");
+    expect({ a: 1 }).to.have.own.property("a", 1);
+    expect({ a: 1 }).to.have.any.keys("a", "b");
+    expect({ a: 1 }).to.have.all.keys("a");
+    expect({ a: 1 }).to.include({ a: 1 });
+    expect({ a: 1 }).to.deep.include({ a: 1 });
+    expect({ a: 1 }).to.include.any.keys("a", "b");
+    expect({ a: 1 }).to.include.all.keys("a");
+    expect({ a: 1 }).to.not.be.empty;
   });
 });
 

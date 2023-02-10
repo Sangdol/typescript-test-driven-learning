@@ -10,4 +10,5 @@ Testing
 
 ```sh
 yarn test
+yarn test-watch
 ```
