@@ -32,6 +32,17 @@ describe("Enum", function (this: Mocha.Suite) {
     expect(nullSc).to.equal(undefined);
   });
 
+  it("String to Enum", () => {
+    enum StringColor { Red = "RedValue" }
+    const sc: StringColor = "RedValue" as StringColor;
+
+    expect(sc).to.equal(StringColor.Red);
+
+    // No error?
+    const sc2: StringColor = "RedValueWrong" as StringColor;
+    expect(sc2).to.equal("RedValueWrong");
+  });
+
   // https://github.com/Microsoft/TypeScript/issues/17198
   // https://stackoverflow.com/questions/18111657/how-does-one-get-the-names-of-typescript-enum-entries
   it("String Enum iteration", () => {
