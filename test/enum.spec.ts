@@ -1,8 +1,6 @@
 import "mocha";
 import { expect } from "chai";
 
-import { EnumValues } from "enum-values";
-
 describe("Enum", function (this: Mocha.Suite) {
   it("Defautl Enum", () => {
     enum Color { Red, Green, Blue }
@@ -58,12 +56,5 @@ describe("Enum", function (this: Mocha.Suite) {
     }
 
     expect(count).to.equal(4);
-  });
-
-  // https://github.com/slavik57/enum-values
-  it("enum values", () => {
-    enum Color { red = "1", blue = "2" }
-
-    expect(EnumValues.getValues(Color)).to.eql(["1", "2"]);
   });
 });
