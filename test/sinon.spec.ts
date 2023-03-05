@@ -8,6 +8,55 @@ function assert(condition: boolean) {
 }
 
 /**
+ * https://sinonjs.org/releases/latest/stubs/
+ */
+describe("sinon stub", () => {
+  it("should stub work", () => {
+    const stub = sinon.stub();
+    stub.returns(42);
+    assert(stub() === 42);
+  });
+
+  it("should stub work with obj", () => {
+    const obj = {
+      foo() {
+        return 42;
+      },
+    };
+    const stub = sinon.stub(obj, "foo").returns(42);
+    assert(obj.foo() === 42);
+    assert(stub.calledOnce);
+
+    assert(obj.foo() === 42);
+    assert(stub.calledTwice);
+
+    stub.restore();
+
+    assert(obj.foo() === 42);
+    assert(stub.calledTwice);
+  });
+});
+
+/**
+ * https://sinonjs.org/releases/latest/mocks/
+ */
+describe("sinon mock", () => {
+  it("should mock work", () => {
+    const myObj = {
+      foo() {
+        return 42;
+      },
+    };
+
+    const mock = sinon.mock(myObj);
+    mock.expects("foo").once().returns(42);
+
+    assert(myObj.foo() === 42);
+    mock.verify();
+  });
+});
+
+/**
  * https://sinonjs.org/releases/latest/spies/
  */
 describe("sinon spy", () => {
@@ -44,36 +93,6 @@ describe("sinon spy", () => {
 });
 
 /**
- * https://sinonjs.org/releases/latest/stubs/
- */
-describe("sinon stub", () => {
-  it("should stub work", () => {
-    const stub = sinon.stub();
-    stub.returns(42);
-    assert(stub() === 42);
-  });
-
-  it("should stub work with obj", () => {
-    const obj = {
-      foo() {
-        return 42;
-      },
-    };
-    const stub = sinon.stub(obj, "foo").returns(42);
-    assert(obj.foo() === 42);
-    assert(stub.calledOnce);
-
-    assert(obj.foo() === 42);
-    assert(stub.calledTwice);
-
-    stub.restore();
-
-    assert(obj.foo() === 42);
-    assert(stub.calledTwice);
-  });
-});
-
-/**
  * https://sinonjs.org/releases/latest/fakes/
  */
 describe("sinon fake", () => {
@@ -100,24 +119,5 @@ describe("sinon fake", () => {
 
     assert(obj.foo() === 42);
     assert(fake.calledTwice);
-  });
-});
-
-/**
- * https://sinonjs.org/releases/latest/mocks/
- */
-describe("sinon mock", () => {
-  it("should mock work", () => {
-    const myObj = {
-      foo() {
-        return 42;
-      },
-    };
-
-    const mock = sinon.mock(myObj);
-    mock.expects("foo").once().returns(42);
-
-    assert(myObj.foo() === 42);
-    mock.verify();
   });
 });
