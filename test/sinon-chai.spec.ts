@@ -41,12 +41,23 @@ describe("sinon-chai stub", function (this: Mocha.Suite) {
       }
     }
 
-    // If you want to create a stub object of MyConstructor, 
+    // If you want to create a stub object of MyConstructor,
     // but don’t want the constructor to be invoked, use this utility function.
     const stub = sinon.createStubInstance(Foo);
     stub.bar.returns(42);
     stub.bar();
     expect(stub.bar).to.be.called;
+  });
+
+  it("should mimic calledTwiceWith", () => {
+    const stub = sinon.stub();
+    stub(1);
+    stub(2);
+    expect(stub).to.be.calledTwice;
+    expect(stub).to.be.calledWith(1);
+    expect(stub).to.be.calledWith(2);
+    expect(stub.firstCall).to.be.calledWith(1);
+    expect(stub.secondCall).to.be.calledWith(2);
   });
 });
 
