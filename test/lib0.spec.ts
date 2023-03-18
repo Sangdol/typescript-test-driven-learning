@@ -13,6 +13,7 @@ describe("lib0", function (this: Mocha.Suite) {
     encoding.writeVarString(encoder, "Hello World");
     const buf = encoding.toUint8Array(encoder);
 
+    // 123 + 11 (length of the string) + ASCII codes of the string
     expect(buf).to.deep.equal(
       new Uint8Array([123, 11, 72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100])
     );
