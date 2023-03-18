@@ -1,5 +1,6 @@
 import "mocha";
 import { expect } from "chai";
+import _ from "lodash";
 
 import {
   Doc as YDoc,
@@ -111,5 +112,30 @@ describe("yjs", function (this: Mocha.Suite) {
 
     expect(newYDoc1.getText("sang").toString())
       .to.equal(newYDoc2.getText("sang").toString());
+  });
+
+  it.only("should debounce updates with lodash", async () => {
+    const ydoc1 = new YDoc();
+    const ydoc2 = new YDoc();
+
+    const ytext1 = ydoc1.getText("sang");
+    const ytext2 = ydoc2.getText("sang");
+
+    const update =  new Promise((resolve) => {
+      ydoc1.on("update", _.debounce((update) => {
+        applyUpdate(ydoc2, update);
+        resolve("done");
+      } , 100));
+    });
+
+    ytext1.insert(0, "Hello World1 ");
+    ytext1.insert(0, "Hello World2 ");
+
+    await update;
+
+    // This actually doesn't work.
+    expect(ytext1.toString()).to.not.equal(ytext2.toString());
+    expect(ytext1.toString()).to.equal("Hello World2 Hello World1 ");
+    expect(ytext2.toString()).to.equal("");
   });
 });
