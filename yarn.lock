@@ -618,6 +618,13 @@ just-extend@^4.0.2:
   resolved "https://registry.yarnpkg.com/just-extend/-/just-extend-4.2.1.tgz#ef5e589afb61e5d66b24eca749409a8939a8c744"
   integrity sha512-g3UB796vUFIY90VIv/WX3L2c8CS2MdWUww3CNrYmqza1Fg0DURc2K/O4YrnklBdQarSJ/y8JnJYDGc+1iumQjg==
 
+lib0@^0.2.42:
+  version "0.2.69"
+  resolved "https://registry.yarnpkg.com/lib0/-/lib0-0.2.69.tgz#00c50a73211e003cce9df0185e89c349fbf1cad9"
+  integrity sha512-mKB+JtVlYbLqSxp5Twm40LtagQfi1rATGjNvds9E5lKvYYOIjbDLU8vwLaJ7X0z2LX84Aj200fqSvNPQli2DKw==
+  dependencies:
+    isomorphic.js "^0.2.4"
+
 lib0@^0.2.49:
   version "0.2.65"
   resolved "https://registry.yarnpkg.com/lib0/-/lib0-0.2.65.tgz#83113acf3f9191cea3dd021a2bfe110f7f1d71cb"
@@ -1013,6 +1020,13 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==
+
+y-protocols@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/y-protocols/-/y-protocols-1.0.5.tgz#91d574250060b29fcac8f8eb5e276fbad594245e"
+  integrity sha512-Wil92b7cGk712lRHDqS4T90IczF6RkcvCwAD0A2OPg+adKmOe+nOiT/N2hvpQIWS3zfjmtL4CPaH5sIW1Hkm/A==
+  dependencies:
+    lib0 "^0.2.42"
 
 y18n@^5.0.5:
   version "5.0.8"

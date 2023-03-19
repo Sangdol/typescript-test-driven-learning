@@ -23,6 +23,7 @@
     "@types/lodash": "^4.14.191",
     "enum-values": "^1.2.0",
     "lodash": "^4.17.21",
+    "y-protocols": "^1.0.5",
     "yjs": "^13.5.48"
   }
 }

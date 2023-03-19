@@ -12,7 +12,7 @@ import {
   mergeUpdates,
 } from "yjs";
 
-describe("yjs", function (this: Mocha.Suite) {
+describe("yjs update", function (this: Mocha.Suite) {
   it("should sync with remote doc with applyUpdate and encodeStateAsUpdate", () => {
     const ydoc1 = new YDoc();
     const ydoc2 = new YDoc();
@@ -110,8 +110,9 @@ describe("yjs", function (this: Mocha.Suite) {
     applyUpdate(newYDoc1, newState1);
     applyUpdate(newYDoc2, newState2);
 
-    expect(newYDoc1.getText("sang").toString())
-      .to.equal(newYDoc2.getText("sang").toString());
+    expect(newYDoc1.getText("sang").toString()).to.equal(
+      newYDoc2.getText("sang").toString()
+    );
   });
 
   it.only("should debounce updates with lodash", async () => {
@@ -121,11 +122,14 @@ describe("yjs", function (this: Mocha.Suite) {
     const ytext1 = ydoc1.getText("sang");
     const ytext2 = ydoc2.getText("sang");
 
-    const update =  new Promise((resolve) => {
-      ydoc1.on("update", _.debounce((update) => {
-        applyUpdate(ydoc2, update);
-        resolve("done");
-      } , 100));
+    const update = new Promise((resolve) => {
+      ydoc1.on(
+        "update",
+        _.debounce((update) => {
+          applyUpdate(ydoc2, update);
+          resolve("done");
+        }, 100)
+      );
     });
 
     ytext1.insert(0, "Hello World1 ");
@@ -139,3 +143,4 @@ describe("yjs", function (this: Mocha.Suite) {
     expect(ytext2.toString()).to.equal("");
   });
 });
+
