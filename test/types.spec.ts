@@ -52,4 +52,22 @@ describe("Advanced Types", () => {
     expect(getName("name")).to.equal("name");
     expect(getName(() => "name")).to.equal("name");
   });
+
+  it("Type Guards / Type Predicates", () => {
+    type Fish = { swim: () => string };
+    type Bird = { fly: () => string };
+
+    const getSmallPet = (): Fish | Bird => {
+      return { swim: () => "swim" };
+    }
+
+    // Type Predicate: pet is Fish
+    const isFish = (pet: Fish | Bird): pet is Fish => {
+      return 'swim' in pet;
+    }
+
+    const pet = getSmallPet();
+
+    expect(isFish(pet)).to.equal(true);
+  });
 });
