@@ -142,5 +142,20 @@ describe("yjs update", function (this: Mocha.Suite) {
     expect(ytext1.toString()).to.equal("Hello World2 Hello World1 ");
     expect(ytext2.toString()).to.equal("");
   });
+
+  it("should encodeStateAsUpdate add up", () => {
+    const ydoc1 = new YDoc();
+    const ydoc2 = new YDoc();
+
+    const ytext1 = ydoc1.getText("sang");
+    const ytext2 = ydoc2.getText("sang");
+
+    ytext1.insert(0, "Hello World ");
+    ytext2.insert(0, "Hello World ");
+
+    applyUpdate(ydoc1, encodeStateAsUpdate(ydoc2));
+
+    expect(ytext1.toString()).to.equal("Hello World Hello World ");
+  });
 });
 
