@@ -12,8 +12,9 @@ describe("Basic Types", function (this: Mocha.Suite) {
     const list: number[] = [1, 2];
     const tuple: [string, number, boolean] = ["name", 1, true];
 
-    expect(`${isBoolean} ${n} ${name} ${list} ${tuple}`)
-      .to.equal("true 10 name 1,2 name,1,true");
+    expect(`${isBoolean} ${n} ${name} ${list} ${tuple}`).to.equal(
+      "true 10 name 1,2 name,1,true"
+    );
   });
   it("any", () => {
     const any: any = "string";
@@ -59,12 +60,12 @@ describe("Advanced Types", () => {
 
     const getSmallPet = (): Fish | Bird => {
       return { swim: () => "swim" };
-    }
+    };
 
     // Type Predicate: pet is Fish
     const isFish = (pet: Fish | Bird): pet is Fish => {
-      return 'swim' in pet;
-    }
+      return "swim" in pet;
+    };
 
     const pet = getSmallPet();
 
