@@ -115,7 +115,7 @@ describe("yjs update", function (this: Mocha.Suite) {
     );
   });
 
-  it.only("should debounce updates with lodash", async () => {
+  it("should debounce updates with lodash", async () => {
     const ydoc1 = new YDoc();
     const ydoc2 = new YDoc();
 
