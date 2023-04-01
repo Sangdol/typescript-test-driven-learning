@@ -2,8 +2,8 @@ import "mocha";
 import { expect } from "chai";
 
 /**
-  * https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
-  */
+ * https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
+ */
 describe("Everyday Types", function (this: Mocha.Suite) {
   it("Basic Types", () => {
     const isBoolean: boolean = true;
@@ -131,7 +131,7 @@ describe("Everyday Types", function (this: Mocha.Suite) {
     const wrappedNorth1 = { North: "North" as "North" };
     expect(move(1, wrappedNorth1.North)).to.equal("1 North");
 
-    const wrappedNorth2 = { North: "North"} as const;
+    const wrappedNorth2 = { North: "North" } as const;
     expect(move(2, wrappedNorth2.North)).to.equal("2 North");
   });
 
@@ -143,13 +143,19 @@ describe("Everyday Types", function (this: Mocha.Suite) {
 
     expect(liveDangerously(1)).to.equal("1");
   });
+
+  it("symbol", () => {
+    const s1 = Symbol("s");
+    const s2 = Symbol("s");
+
+    expect(s1).to.be.not.equal(s2);
+  });
 });
 
 /**
  * https://www.typescriptlang.org/docs/handbook/advanced-types.html
  */
 describe("Advanced Types", () => {
-
   it("Type Guards / Type Predicates", () => {
     type Fish = { swim: () => string };
     type Bird = { fly: () => string };
