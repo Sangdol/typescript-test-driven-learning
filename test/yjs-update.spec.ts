@@ -62,7 +62,7 @@ describe("yjs update", function (this: Mocha.Suite) {
     const ytext1 = ydoc1.getText("sang");
     const ytext2 = ydoc2.getText("sang");
 
-    ytext1.insert(0, "Hello World");
+    ytext1.insert(0, "Hello World ");
     ytext2.insert(0, "Hallo Welt ");
 
     const stateVector1 = encodeStateVector(ydoc1);
@@ -71,7 +71,12 @@ describe("yjs update", function (this: Mocha.Suite) {
     // This can reduce the size of the update.
     const diff1 = encodeStateAsUpdate(ydoc2, stateVector1);
     applyUpdate(ydoc1, diff1);
-    expect(ytext1.toString()).to.equal("Hallo Welt Hello World");
+
+    // The insert order is not guaranteed.
+    expect(ytext1.toString()).to.satisfy((text: string) => {
+      return text === "Hallo Welt Hello World " || text === "Hello World Hallo Welt ";
+    });
+
     expect(ytext1.toString()).to.not.equal(ytext2.toString());
 
     const diff2 = encodeStateAsUpdate(ydoc1, stateVector2);
