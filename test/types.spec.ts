@@ -102,3 +102,73 @@ describe("Utility Types", () => {
     });
   });
 });
+
+/**
+ * https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html
+ */
+describe("TS for Java/C# Programmers", () => {
+  it("Structural obj type", () => {
+    interface PointLike {
+      x: number
+      y: number
+    }
+
+    interface Named {
+      name: string
+    }
+
+    const obj = {
+      x: 1,
+      y: 2,
+      name: 'abc'
+    };
+
+    function add(point: PointLike) {
+      return point.x + point.y;
+    }
+
+    function name(named: Named) {
+      return named.name;
+    }
+
+    // TS's type system is structural, not nominal.
+    expect(add(obj)).to.be.equal(3);
+    expect(name(obj)).to.be.equal('abc');
+
+    interface Empty {}
+
+    function empty(e: Empty) {
+      return ''
+    }
+
+    // This is not a problem as well.
+    expect(empty(obj)).to.be.equal('');
+  });
+
+  it("Identical types", () => {
+    class Car {
+      drive() { return 'car' }
+    }
+
+    class Golfer {
+      drive() { return 'golfer' }
+    }
+
+    // This is also not a problem.
+    const car: Car = new Golfer();
+
+    expect(car.drive()).to.be.equal('golfer');
+  });
+
+  it("Reflection not possible", () => {
+    class Car {
+      drive() { return 'car' }
+    }
+
+    const car: Car = new Car();
+
+    // TS's typs system is not reified. No type information at runtime.
+    // No "Car".
+    expect(typeof car).to.be.equal("object");
+  });
+});
