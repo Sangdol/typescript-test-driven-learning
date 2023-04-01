@@ -91,6 +91,58 @@ describe("Everyday Types", function (this: Mocha.Suite) {
     const point3D: Point3D = { x: 1, y: 2, z: 3 };
     expect(`${point3D.x} ${point3D.y} ${point3D.z}`).to.equal("1 2 3");
   });
+
+  it("Type Assertions", () => {
+    const someValue: any = "this is a string";
+    const strLength: number = (<string>someValue).length;
+    expect(strLength).to.equal(16);
+
+    const someValue2: any = "this is a string";
+    const strLength2: number = (someValue2 as string).length;
+    expect(strLength2).to.equal(16);
+
+    interface Point {
+      x: number;
+      y: number;
+    }
+    // Coercion
+    const point: Point = {} as any as Point;
+    point.x = 1;
+    point.y = 2;
+    expect(`${point.x} ${point.y}`).to.equal("1 2");
+  });
+
+  it("Literal Types", () => {
+    type Direction = "North" | "East" | "South" | "West";
+    const direction: Direction = "North";
+    expect(direction).to.equal("North");
+
+    // Numeric Literal Types
+    type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+    const digit: Digit = 1;
+    expect(digit).to.equal(1);
+
+    // Literal Type to string
+    function move(distance: number, direction: Direction) {
+      return `${distance} ${direction}`;
+    }
+
+    // Avoiding "Argument of type 'string' is not assignable to parameter of type Direction."
+    const wrappedNorth1 = { North: "North" as "North" };
+    expect(move(1, wrappedNorth1.North)).to.equal("1 North");
+
+    const wrappedNorth2 = { North: "North"} as const;
+    expect(move(2, wrappedNorth2.North)).to.equal("3 North");
+  });
+
+  it("Non-null assertion operator", () => {
+    function liveDangerously(x?: number | null) {
+      // Avoiding "Object is possibly 'null'."
+      return x!.toFixed();
+    }
+
+    expect(liveDangerously(1)).to.equal("1");
+  });
 });
 
 /**
