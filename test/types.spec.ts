@@ -21,18 +21,32 @@ describe("Basic Types", function (this: Mocha.Suite) {
     expect(<string>any.length).to.equal(6);
     expect((any as string).length).to.equal(6);
   });
-});
 
-/**
- * https://www.typescriptlang.org/docs/handbook/advanced-types.html
- */
-describe("Advanced Types", () => {
   it("Union", () => {
     const union1: string | number = "abc";
     const union2: string | number = 1;
 
     expect(`${union1} ${union2}`).to.equal("abc 1");
   });
+
+  it("Union: narrowing", () => {
+    function pringId(id: number | string) {
+      if (typeof id === "string") {
+        return id.toUpperCase();
+      } else {
+        return id;
+      }
+    }
+
+    expect(pringId("abc")).to.equal("ABC");
+    expect(pringId(1)).to.equal(1);
+  });
+});
+
+/**
+ * https://www.typescriptlang.org/docs/handbook/advanced-types.html
+ */
+describe("Advanced Types", () => {
 
   /**
    * Use interface when it's possible
