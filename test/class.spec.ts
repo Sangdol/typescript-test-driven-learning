@@ -1,7 +1,6 @@
 import "mocha";
 import { expect } from "chai";
 
-
 describe("Class", function (this: Mocha.Suite) {
   it("Basic", () => {
     class Greeter {
@@ -20,9 +19,9 @@ describe("Class", function (this: Mocha.Suite) {
 
   it("Accessors", () => {
     class Person {
-      private _name;
+      private _name: string;
 
-      set name(name: string) {
+      constructor(name: string) {
         this._name = name;
       }
 
@@ -31,8 +30,7 @@ describe("Class", function (this: Mocha.Suite) {
       }
     }
 
-    const p: Person = new Person();
-    p.name = "abc";
+    const p: Person = new Person("abc");
     expect(p.name).to.equal("abc");
   });
 });
