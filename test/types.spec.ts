@@ -132,7 +132,7 @@ describe("Everyday Types", function (this: Mocha.Suite) {
     expect(move(1, wrappedNorth1.North)).to.equal("1 North");
 
     const wrappedNorth2 = { North: "North"} as const;
-    expect(move(2, wrappedNorth2.North)).to.equal("3 North");
+    expect(move(2, wrappedNorth2.North)).to.equal("2 North");
   });
 
   it("Non-null assertion operator", () => {
