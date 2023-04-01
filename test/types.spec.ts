@@ -1,10 +1,10 @@
 import "mocha";
 import { expect } from "chai";
 
-describe("Basic Types", function (this: Mocha.Suite) {
-  /**
-   * https://www.typescriptlang.org/docs/handbook/basic-types.html
-   */
+/**
+  * https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
+  */
+describe("Everyday Types", function (this: Mocha.Suite) {
   it("Basic Types", () => {
     const isBoolean: boolean = true;
     const n: number = 10;
@@ -41,12 +41,6 @@ describe("Basic Types", function (this: Mocha.Suite) {
     expect(pringId("abc")).to.equal("ABC");
     expect(pringId(1)).to.equal(1);
   });
-});
-
-/**
- * https://www.typescriptlang.org/docs/handbook/advanced-types.html
- */
-describe("Advanced Types", () => {
 
   /**
    * Use interface when it's possible
@@ -66,7 +60,43 @@ describe("Advanced Types", () => {
 
     expect(getName("name")).to.equal("name");
     expect(getName(() => "name")).to.equal("name");
+
+    // Extending types via intersection
+    type Animal = {
+      name: string;
+    };
+
+    type Bear = Animal & {
+      honey: boolean;
+    };
+
+    const bear: Bear = { name: "bear", honey: true };
+    expect(`${bear.name} ${bear.honey}`).to.equal("bear true");
   });
+
+  it("Interfaces", () => {
+    interface Point {
+      x: number;
+      y: number;
+    }
+
+    const point: Point = { x: 1, y: 2 };
+    expect(`${point.x} ${point.y}`).to.equal("1 2");
+
+    // Extending interfaces via extends
+    interface Point3D extends Point {
+      z: number;
+    }
+
+    const point3D: Point3D = { x: 1, y: 2, z: 3 };
+    expect(`${point3D.x} ${point3D.y} ${point3D.z}`).to.equal("1 2 3");
+  });
+});
+
+/**
+ * https://www.typescriptlang.org/docs/handbook/advanced-types.html
+ */
+describe("Advanced Types", () => {
 
   it("Type Guards / Type Predicates", () => {
     type Fish = { swim: () => string };
@@ -123,18 +153,18 @@ describe("Utility Types", () => {
 describe("TS for Java/C# Programmers", () => {
   it("Structural obj type", () => {
     interface PointLike {
-      x: number
-      y: number
+      x: number;
+      y: number;
     }
 
     interface Named {
-      name: string
+      name: string;
     }
 
     const obj = {
       x: 1,
       y: 2,
-      name: 'abc'
+      name: "abc",
     };
 
     function add(point: PointLike) {
@@ -147,36 +177,42 @@ describe("TS for Java/C# Programmers", () => {
 
     // TS's type system is structural, not nominal.
     expect(add(obj)).to.be.equal(3);
-    expect(name(obj)).to.be.equal('abc');
+    expect(name(obj)).to.be.equal("abc");
 
     interface Empty {}
 
     function empty(e: Empty) {
-      return ''
+      return "";
     }
 
     // This is not a problem as well.
-    expect(empty(obj)).to.be.equal('');
+    expect(empty(obj)).to.be.equal("");
   });
 
   it("Identical types", () => {
     class Car {
-      drive() { return 'car' }
+      drive() {
+        return "car";
+      }
     }
 
     class Golfer {
-      drive() { return 'golfer' }
+      drive() {
+        return "golfer";
+      }
     }
 
     // This is also not a problem.
     const car: Car = new Golfer();
 
-    expect(car.drive()).to.be.equal('golfer');
+    expect(car.drive()).to.be.equal("golfer");
   });
 
   it("Reflection not possible", () => {
     class Car {
-      drive() { return 'car' }
+      drive() {
+        return "car";
+      }
     }
 
     const car: Car = new Car();
