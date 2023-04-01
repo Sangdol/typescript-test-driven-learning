@@ -47,5 +47,11 @@ describe("chai", function (this: Mocha.Suite) {
     expect({ a: 1 }).to.include.all.keys("a");
     expect({ a: 1 }).to.not.be.empty;
   });
+
+  it("satisfy", () => {
+    expect(Math.random()).to.satisfy((value: number) => {
+      return 0 <= value && value < 1;
+    });
+  });
 });
 
