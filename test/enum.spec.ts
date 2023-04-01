@@ -1,6 +1,14 @@
 import "mocha";
 import { expect } from "chai";
 
+
+/**
+ * https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#enums
+ * https://www.typescriptlang.org/docs/handbook/enums.html
+ *
+ * - It's not a type-level extension; it's added to the language and runtime.
+ * - Hold off on using unless you are sure.
+ */
 describe("Enum", function (this: Mocha.Suite) {
   it("Defautl Enum", () => {
     enum Color { Red, Green, Blue }
