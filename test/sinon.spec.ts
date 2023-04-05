@@ -121,3 +121,24 @@ describe("sinon fake", () => {
     assert(fake.calledTwice);
   });
 });
+
+describe("sinon fake timer", () => {
+  it("should fake timer work", () => {
+    const clock = sinon.useFakeTimers();
+    const callback = sinon.fake();
+    setTimeout(callback, 1000);
+    clock.tick(1000);
+    assert(callback.calledOnce);
+    clock.restore();
+  });
+
+  it("should fake timer set date work", () => {
+    const clock = sinon.useFakeTimers(new Date(2019, 1, 1));
+
+    assert(new Date().getTime() === new Date(2019, 1, 1).getTime());
+
+    // Back to the future
+    clock.restore();
+    assert(new Date().getTime() !== new Date(2019, 1, 1).getTime());
+  });
+});
