@@ -137,6 +137,10 @@ describe("sinon fake timer", () => {
 
     assert(new Date().getTime() === new Date(2019, 1, 1).getTime());
 
+    // Fast forward a day
+    clock.tick(1000 * 60 * 60 * 24);
+    assert(new Date().getTime() === new Date(2019, 1, 2).getTime());
+
     // Back to the future
     clock.restore();
     assert(new Date().getTime() !== new Date(2019, 1, 1).getTime());
