@@ -33,4 +33,32 @@ describe("Class", function (this: Mocha.Suite) {
     const p: Person = new Person("abc");
     expect(p.name).to.equal("abc");
   });
+
+  it("instanceof", () => {
+    class Mammal {}
+    class Animal extends Mammal {}
+
+    // inheritance with extends
+    function Person() {}
+    Person.prototype = Object.create(Mammal.prototype);
+
+    const a: Animal = new Animal();
+    const p = new Person();
+
+    expect(a instanceof Animal).to.equal(true);
+    expect(a instanceof Person).to.equal(false);
+    expect(p instanceof Animal).to.equal(false);
+    expect(p instanceof Person).to.equal(true);
+
+    // prototype
+    expect(Animal.prototype instanceof Animal).to.equal(false);
+    expect(Person.prototype instanceof Person).to.equal(false);
+    expect(Person.prototype instanceof Mammal).to.equal(true);
+
+    // Everything is object
+    expect(Animal.prototype instanceof Object).to.equal(true);
+
+    // Everything is function
+    expect(Animal instanceof Function).to.equal(true);
+  });
 });
