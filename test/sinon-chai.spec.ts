@@ -60,6 +60,14 @@ describe("sinon-chai stub", function (this: Mocha.Suite) {
     expect(stub.firstCall).to.be.calledWith(1);
     expect(stub.secondCall).to.be.calledWith(2);
   });
+
+  it("should return different values for first and second call", () => {
+    const stub = sinon.stub();
+    stub.onFirstCall().returns(42);
+    stub.onSecondCall().returns(43);
+    expect(stub()).to.be.equal(42);
+    expect(stub()).to.be.equal(43);
+  });
 });
 
 /**
