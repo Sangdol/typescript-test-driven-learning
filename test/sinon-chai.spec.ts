@@ -15,8 +15,9 @@ describe("sinon-chai stub", function (this: Mocha.Suite) {
   it("should work", () => {
     const stub = sinon.stub();
     stub.returns(42);
-    stub();
+    stub(1);
     expect(stub).to.be.called;
+    expect(stub).to.be.calledWith(1);
   });
 
   it("should work with obj", () => {
