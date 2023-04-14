@@ -18,5 +18,14 @@ describe("Async", function(this: Mocha.Suite) {
 
     expect(results[1].status).to.be.equal("fulfilled");
     expect((results[1] as PromiseFulfilledResult<number>).value).to.be.equal(1);
+
+    // Using filter and type guards
+    const fulfilled = results.filter((result): result is PromiseFulfilledResult<number> => result.status === "fulfilled");
+    expect(fulfilled.length).to.be.equal(1);
+    expect(fulfilled[0].value).to.be.equal(1);
+
+    const rejected = results.filter((result): result is PromiseRejectedResult => result.status === "rejected");
+    expect(rejected.length).to.be.equal(1);
+    expect(rejected[0].reason.message).to.be.equal("Hallo");
   });
 });
