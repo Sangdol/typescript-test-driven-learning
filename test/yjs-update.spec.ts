@@ -120,6 +120,35 @@ describe("yjs update", function (this: Mocha.Suite) {
     );
   });
 
+  it("should json has all information", () => {
+    const ydoc = new YDoc();
+    const ytext = ydoc.getText("sang");
+
+    ytext.insert(0, "Hello World");
+    expect(ytext.toJSON()).to.deep.equal('Hello World');
+
+    ytext.insert(1, "e");
+    expect(ytext.toJSON()).to.deep.equal('Heello World');
+
+    expect(ydoc.toJSON()).to.deep.equal({
+      "sang": "Heello World"
+    });
+
+    ytext.delete(1, 1);
+    expect(ydoc.toJSON()).to.deep.equal({
+      "sang": "Hello World"
+    });
+
+    const ymap = ydoc.getMap("map");
+    ymap.set("key", "value");
+    expect(ydoc.toJSON()).to.deep.equal({
+      "sang": "Hello World",
+      "map": {
+        "key": "value"
+      }
+    });
+  });
+
   it("should debounce updates with lodash", async () => {
     const ydoc1 = new YDoc();
     const ydoc2 = new YDoc();
