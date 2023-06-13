@@ -149,6 +149,19 @@ describe("yjs update", function (this: Mocha.Suite) {
     });
   });
 
+  it.only("should encoded size by encodeStateAsUpdate only increase", () => {
+    const ydoc = new YDoc();
+    const ytext = ydoc.getText("sang");
+
+    expect(encodeStateAsUpdate(ydoc).byteLength).to.equal(2);
+
+    ytext.insert(0, "Hello World");
+    expect(encodeStateAsUpdate(ydoc).byteLength).to.equal(28);
+
+    ytext.delete(0, 1);
+    expect(encodeStateAsUpdate(ydoc).byteLength).to.equal(43);
+  });
+
   it("should debounce updates with lodash", async () => {
     const ydoc1 = new YDoc();
     const ydoc2 = new YDoc();
