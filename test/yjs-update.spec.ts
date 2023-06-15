@@ -149,7 +149,7 @@ describe("yjs update", function (this: Mocha.Suite) {
     });
   });
 
-  it.only("should encoded size by encodeStateAsUpdate only increase", () => {
+  it("should encoded size by encodeStateAsUpdate only increase", () => {
     const ydoc = new YDoc();
     const ytext = ydoc.getText("sang");
 
