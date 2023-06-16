@@ -1,4 +1,4 @@
 {
-  "src/**/*.ts": ["eslint --max-warnings=0"],
+  "**/*.ts": ["eslint --max-warnings=0"],
   "**/*": ["prettier --write --ignore-unknown"]
 }

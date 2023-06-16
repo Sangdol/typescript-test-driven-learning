@@ -15,7 +15,9 @@ describe("lib0", function (this: Mocha.Suite) {
 
     // 123 + 11 (length of the string) + ASCII codes of the string
     expect(buf).to.deep.equal(
-      new Uint8Array([123, 11, 72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100])
+      new Uint8Array([
+        123, 11, 72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100,
+      ])
     );
 
     const decoder = decoding.createDecoder(buf);
@@ -33,7 +35,10 @@ describe("lib0", function (this: Mocha.Suite) {
     const buf = encoding.toUint8Array(encoder);
 
     expect(buf).to.deep.equal(
-      new Uint8Array([15, 236, 149, 136, 235, 133, 149, 237, 149, 152, 236, 132, 184, 236, 154, 148])
+      new Uint8Array([
+        15, 236, 149, 136, 235, 133, 149, 237, 149, 152, 236, 132, 184, 236,
+        154, 148,
+      ])
     );
 
     const decoder = decoding.createDecoder(buf);

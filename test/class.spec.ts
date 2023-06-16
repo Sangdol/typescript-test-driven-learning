@@ -39,6 +39,7 @@ describe("Class", function (this: Mocha.Suite) {
     class Animal extends Mammal {}
 
     // inheritance with extends
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     function Person() {}
     Person.prototype = Object.create(Mammal.prototype);
 
