@@ -1,12 +1,10 @@
-Installation
-===
+# Installation
 
 ```sh
-yarn 
+yarn
 ```
 
-Testing
-===
+# Testing
 
 ```sh
 # Test all
@@ -20,4 +18,10 @@ yarn mocha <filename>
 
 # Watch a single file
 yarn mocha <filename> --watch
+```
+
+# Linting
+
+```sh
+yarn eslint **/*ts
 ```
