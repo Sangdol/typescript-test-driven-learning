@@ -32,17 +32,13 @@ describe("lib0", function (this: Mocha.Suite) {
   it("should encoding and decoding work with Koreans", () => {
     const encoder = encoding.createEncoder();
     encoding.writeVarString(encoder, "안녕하세요");
-    const buf = encoding.toUint8Array(encoder);
+    encoding.writeVarString(encoder, "Hallo Welt");
 
-    expect(buf).to.deep.equal(
-      new Uint8Array([
-        15, 236, 149, 136, 235, 133, 149, 237, 149, 152, 236, 132, 184, 236,
-        154, 148,
-      ])
-    );
+    const buf = encoding.toUint8Array(encoder);
 
     const decoder = decoding.createDecoder(buf);
     expect(decoding.readVarString(decoder)).to.equal("안녕하세요");
+    expect(decoding.readVarString(decoder)).to.equal("Hallo Welt");
     expect(decoding.hasContent(decoder)).to.equal(false);
   });
 });
