@@ -21,6 +21,8 @@ describe("yjs update", function (this: Mocha.Suite) {
     const ytext2 = ydoc2.getText("sang");
 
     ydoc1.on("update", (update) => {
+      console.log("ydoc1 update", update);
+
       applyUpdate(ydoc2, update);
     });
 
@@ -74,7 +76,9 @@ describe("yjs update", function (this: Mocha.Suite) {
 
     // The insert order is not guaranteed.
     expect(ytext1.toString()).to.satisfy((text: string) => {
-      return text === "Hallo Welt Hello World " || text === "Hello World Hallo Welt ";
+      return (
+        text === "Hallo Welt Hello World " || text === "Hello World Hallo Welt "
+      );
     });
 
     expect(ytext1.toString()).to.not.equal(ytext2.toString());
@@ -125,27 +129,27 @@ describe("yjs update", function (this: Mocha.Suite) {
     const ytext = ydoc.getText("sang");
 
     ytext.insert(0, "Hello World");
-    expect(ytext.toJSON()).to.deep.equal('Hello World');
+    expect(ytext.toJSON()).to.deep.equal("Hello World");
 
     ytext.insert(1, "e");
-    expect(ytext.toJSON()).to.deep.equal('Heello World');
+    expect(ytext.toJSON()).to.deep.equal("Heello World");
 
     expect(ydoc.toJSON()).to.deep.equal({
-      "sang": "Heello World"
+      sang: "Heello World",
     });
 
     ytext.delete(1, 1);
     expect(ydoc.toJSON()).to.deep.equal({
-      "sang": "Hello World"
+      sang: "Hello World",
     });
 
     const ymap = ydoc.getMap("map");
     ymap.set("key", "value");
     expect(ydoc.toJSON()).to.deep.equal({
-      "sang": "Hello World",
-      "map": {
-        "key": "value"
-      }
+      sang: "Hello World",
+      map: {
+        key: "value",
+      },
     });
   });
 
@@ -205,4 +209,3 @@ describe("yjs update", function (this: Mocha.Suite) {
     expect(ytext1.toString()).to.equal("Hello World Hello World ");
   });
 });
-
