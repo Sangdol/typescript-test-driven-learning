@@ -62,4 +62,40 @@ describe("Class", function (this: Mocha.Suite) {
     // Everything is function
     expect(Animal instanceof Function).to.equal(true);
   });
+
+  it("super", () => {
+    class A {
+      value: number;
+      constructor() {
+        this.value = 0;
+      }
+      increment() {
+        this.value++;
+      }
+    }
+
+    class B extends A {
+      increment() {
+        this.value += 2;
+        super.increment();
+      }
+    }
+
+    // Skip
+    class C extends B {}
+
+    class D extends C {
+      increment() {
+        this.value += 3;
+        super.increment();
+      }
+    }
+
+    const d = new D();
+
+    expect(d.value).to.equal(0);
+
+    d.increment();
+    expect(d.value).to.equal(6);
+  });
 });
