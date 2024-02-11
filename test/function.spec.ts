@@ -62,4 +62,12 @@ describe("Generic Functions", function (this: Mocha.Suite) {
     expect(d1).to.eql(new Date(12345678));
     expect(d2).to.eql(new Date(5, 5, 5));
   });
+
+  it("Rest Parameters", () => {
+    function multiply(n: number, ...m: number[]): number {
+      return m.reduce((acc, val) => acc * val, n);
+    }
+
+    expect(multiply(2, 3, 4)).to.equal(24);
+  });
 });
