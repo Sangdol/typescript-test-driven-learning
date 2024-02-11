@@ -42,4 +42,24 @@ describe("Generic Functions", function (this: Mocha.Suite) {
     const arr = combine<number | string>([1, 2], ["a", "b"]);
     expect(arr).to.eql([1, 2, "a", "b"]);
   });
+
+  it("overloads", () => {
+    function makeDate(timestamp: number): Date;
+    function makeDate(m: number, d: number, y: number): Date;
+
+    // The implementation signature is not visible from the outside.
+    // You should always have two or more signatures above the implementation signature.
+    function makeDate(mOrTimestamp: number, d?: number, y?: number): Date {
+      if (d !== undefined && y !== undefined) {
+        return new Date(y, mOrTimestamp, d);
+      } else {
+        return new Date(mOrTimestamp);
+      }
+    }
+
+    const d1 = makeDate(12345678);
+    const d2 = makeDate(5, 5, 5);
+    expect(d1).to.eql(new Date(12345678));
+    expect(d2).to.eql(new Date(5, 5, 5));
+  });
 });
