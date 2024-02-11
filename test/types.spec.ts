@@ -394,4 +394,81 @@ describe("TS for Java/C# Programmers", () => {
     const name: Name = "Alice";
     expect(name).to.be.equal("Alice");
   });
+
+  it("Conditional Types", () => {
+    interface Animal {
+      live(): void;
+    }
+
+    interface Dog extends Animal {
+      woof(): void;
+    }
+
+    type Example1 = Dog extends Animal ? number : string;
+    type Example2 = RegExp extends Animal ? number : string;
+
+    const e1: Example1 = 1;
+    const e2: Example2 = "string";
+    expect(`${e1} ${e2}`).to.be.equal("1 string");
+
+    // Practical example with generics
+    interface IdLabel {
+      id: number;
+    }
+
+    interface NameLabel {
+      name: string;
+    }
+
+    // We can avoid overloads with conditional types.
+    type NameOrId<T extends number | string> = T extends number
+      ? IdLabel
+      : NameLabel;
+
+    const nameOrId1: NameOrId<number> = { id: 1 };
+    const nameOrId2: NameOrId<string> = { name: "name" };
+    expect(`${nameOrId1.id} ${nameOrId2.name}`).to.be.equal("1 name");
+
+    // Flatten array
+    type Flatten<T> = T extends any[] ? T[number] : T;
+
+    type Str = Flatten<string[]>;
+    type Num = Flatten<number>;
+
+    const str: Str = "string";
+    const num: Num = 1;
+    expect(`${str} ${num}`).to.be.equal("string 1");
+
+    // infer: a keyword for conditional types
+    type Unpacked<T> = T extends Array<infer U> ? U : T;
+
+    type T0 = Unpacked<string[]>;
+    type T1 = Unpacked<number>;
+
+    const t0: T0 = "string";
+    const t1: T1 = 1;
+    expect(`${t0} ${t1}`).to.be.equal("string 1");
+  });
+
+  it("Mapped Types", () => {
+    type OptionsFlags<Type> = {
+      [Property in keyof Type]: boolean;
+    };
+
+    type FeatureFlags = {
+      darkMode: () => void;
+      newUserProfile: () => void;
+    };
+
+    type FeatureOptions = OptionsFlags<FeatureFlags>;
+
+    const featureOptions: FeatureOptions = {
+      darkMode: true,
+      newUserProfile: false,
+    };
+
+    expect(
+      `${featureOptions.darkMode} ${featureOptions.newUserProfile}`
+    ).to.be.equal("true false");
+  });
 });
