@@ -358,4 +358,40 @@ describe("TS for Java/C# Programmers", () => {
 
     expect(g(f())).to.be.equal(10);
   });
+
+  it("Indexed Access Types", () => {
+    type Person = { age: number; name: string; alive: boolean };
+    type Age = Person["age"];
+
+    const age: Age = 10;
+    expect(age).to.be.equal(10);
+
+    type I1 = Person["age" | "name"];
+    type I2 = Person[keyof Person];
+
+    const i1: I1 = 10;
+    const i2: I2 = true;
+    expect(`${i1} ${i2}`).to.be.equal("10 true");
+
+    // indexing array with number
+    const MyArray = [
+      { name: "Alice", age: 15 },
+      { name: "Bob", age: 23 },
+    ];
+
+    type Person1 = (typeof MyArray)[number];
+    type Age1 = (typeof MyArray)[number]["age"];
+
+    const p: Person1 = { name: "Alice", age: 15 };
+    const a: Age1 = 15;
+    expect(`${p.name} ${a}`).to.be.equal("Alice 15");
+
+    // You can only use types to index into other types.
+    // const key = "name"; <= This is illegal.
+    type key = "name";
+    type Name = Person[key];
+
+    const name: Name = "Alice";
+    expect(name).to.be.equal("Alice");
+  });
 });
