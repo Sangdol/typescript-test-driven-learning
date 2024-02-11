@@ -286,7 +286,6 @@ describe("TS for Java/C# Programmers", () => {
 
   it("unknown", () => {
     const value: unknown = "string";
-    // This is not a problem.
     expect((value as string).length).to.be.equal(6);
 
     // This is a problem.
@@ -314,5 +313,35 @@ describe("TS for Java/C# Programmers", () => {
 
     // This is not a problem.
     expect(() => error("error")).to.throw("error");
+  });
+
+  it("Readonly Array", () => {
+    const a: number[] = [1, 2, 3, 4];
+    const ro: ReadonlyArray<number> = a;
+
+    expect(ro[0]).to.be.equal(1);
+
+    // This is a problem.
+    // ro[0] = 12;
+    // Index signature in type 'readonly number[]' only permits reading.
+  });
+
+  it("Tuple Types", () => {
+    let x: [string, number];
+    x = ["hello", 10];
+
+    expect(x[0]).to.be.equal("hello");
+
+    // This is a problem.
+    // x[3] = "world";
+
+    type Either2dOr3d = [number, number, number?];
+
+    function setCoordinate(coord: Either2dOr3d) {
+      const [x, y, z] = coord;
+      return `${x} ${y} ${z}`;
+    }
+
+    expect(setCoordinate([1, 2])).to.be.equal("1 2 undefined");
   });
 });
