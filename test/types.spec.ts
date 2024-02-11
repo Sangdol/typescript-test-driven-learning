@@ -344,4 +344,18 @@ describe("TS for Java/C# Programmers", () => {
 
     expect(setCoordinate([1, 2])).to.be.equal("1 2 undefined");
   });
+
+  it("typeof types", () => {
+    function f() {
+      return { x: 10, y: 3 };
+    }
+
+    type P = ReturnType<typeof f>;
+
+    function g(p: P) {
+      return p.x;
+    }
+
+    expect(g(f())).to.be.equal(10);
+  });
 });
