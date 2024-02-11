@@ -71,4 +71,13 @@ describe("interfaces", function (this: Mocha.Suite) {
       "Drawing a red circle with radius 10"
     );
   });
+
+  it("Generic Object Types", () => {
+    interface Box<T> {
+      value: T;
+    }
+
+    const box: Box<string> = { value: "hi" };
+    expect(box.value).to.equal("hi");
+  });
 });
