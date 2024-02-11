@@ -283,4 +283,36 @@ describe("TS for Java/C# Programmers", () => {
     // No "Car".
     expect(typeof car).to.be.equal("object");
   });
+
+  it("unknown", () => {
+    const value: unknown = "string";
+    // This is not a problem.
+    expect((value as string).length).to.be.equal(6);
+
+    // This is a problem.
+    // expect(value.length).to.be.equal(6);
+    // Property 'length' does not exist on type 'unknown'.
+
+    function processValue(value: unknown) {
+      if (typeof value === "string") {
+        return value.toUpperCase();
+      } else if (typeof value === "number") {
+        return value.toFixed(2);
+      } else {
+        return "";
+      }
+    }
+
+    expect(processValue("string")).to.be.equal("STRING");
+    expect(processValue(1)).to.be.equal("1.00");
+  });
+
+  it("never", () => {
+    function error(message: string): never {
+      throw new Error(message);
+    }
+
+    // This is not a problem.
+    expect(() => error("error")).to.throw("error");
+  });
 });
