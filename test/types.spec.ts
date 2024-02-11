@@ -1,6 +1,9 @@
 import "mocha";
 import { expect } from "chai";
 
+// Ignore all type-checking errors for explaining the TS types.
+/* eslint-disable */
+
 /**
  * https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
  */
@@ -32,6 +35,7 @@ describe("Everyday Types", function (this: Mocha.Suite) {
   it("Union: narrowing", () => {
     function pringId(id: number | string) {
       if (typeof id === "string") {
+        // type guard
         return id.toUpperCase();
       } else {
         return id;
