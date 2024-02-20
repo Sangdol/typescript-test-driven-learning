@@ -58,3 +58,16 @@ describe("MessageEvent", function (this: Mocha.Suite) {
     expect(event.origin).to.equal("http://localhost");
   });
 });
+
+describe("dispatchEvent", function (this: Mocha.Suite) {
+  it("should work", (done) => {
+    class Target extends EventTarget {}
+
+    const event = new Event("click");
+    const target = new Target();
+    target.addEventListener("click", () => {
+      done();
+    });
+    target.dispatchEvent(event);
+  });
+});
