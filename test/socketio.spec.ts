@@ -161,3 +161,32 @@ describe("socket.io with namespace", () => {
     serverSocket.emit("hello", "world");
   });
 });
+
+/**
+ * https://socket.io/docs/v4/server-socket-instance/#sockethandshake
+ */
+describe("socket.io handshake", () => {
+  let io: Server, serverSocket: ServerSocket, clientSocket: ClientSocket;
+
+  before((done) => {
+    const httpServer = createServer();
+    io = new Server(httpServer);
+    httpServer.listen(() => {
+      const port = (httpServer.address() as AddressInfo).port;
+      clientSocket = ioc(`http://localhost:${port}?id=1`);
+      io.on("connection", (socket) => {
+        serverSocket = socket;
+      });
+      clientSocket.on("connect", done);
+    });
+  });
+
+  after(() => {
+    io.close();
+    clientSocket.disconnect();
+  });
+
+  it("should work", () => {
+    assert.equal(serverSocket.handshake.query.id, "1");
+  });
+});
