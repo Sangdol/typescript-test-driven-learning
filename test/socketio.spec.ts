@@ -53,6 +53,11 @@ describe("socket.io basic", () => {
     serverSocket.emit("hello", "world");
   });
 
+  it("should be connected", () => {
+    assert.equal(serverSocket.connected, true);
+    assert.equal(clientSocket.connected, true);
+  });
+
   it("should work with an acknowledgement", (done) => {
     serverSocket.on("hi", (cb) => {
       cb("hola");
