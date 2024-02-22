@@ -13,8 +13,7 @@ function waitFor(socket: ServerSocket | ClientSocket, event: string) {
 function waitForCb(
   socket: ServerSocket | ClientSocket,
   event: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  cb: (arg: any) => void
+  cb: (arg: unknown) => void
 ) {
   return new Promise((resolve) => {
     socket.once(event, (arg) => {
