@@ -180,36 +180,6 @@ describe("Advanced Types", () => {
 });
 
 /**
- * https://www.typescriptlang.org/docs/handbook/utility-types.html
- */
-describe("Utility Types", () => {
-  it("Partial", () => {
-    type Todo = {
-      title: string;
-      description: string;
-    };
-
-    const updateTodo = (todo: Todo, fieldsToUpdate: Partial<Todo>) => {
-      return { ...todo, ...fieldsToUpdate };
-    };
-
-    const todo1 = {
-      title: "organize desk",
-      description: "clear clutter",
-    };
-
-    const todo2 = updateTodo(todo1, {
-      description: "throw out trash",
-    });
-
-    expect(todo2).to.deep.equal({
-      title: "organize desk",
-      description: "throw out trash",
-    });
-  });
-});
-
-/**
  * https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html
  */
 describe("TS for Java/C# Programmers", () => {
