@@ -58,4 +58,29 @@ describe("Prototypes", () => {
     // @ts-ignore
     expect(Function.prototype.__proto__).to.equal(Object.prototype);
   });
+
+  it("class prototype", () => {
+    class Pet {
+      constructor(public name: string) {}
+
+      getName() {
+        return this.name;
+      }
+    }
+
+    class Dog extends Pet {
+      constructor(name: string, public breed: string) {
+        super(name);
+      }
+
+      getBreed() {
+        return this.breed;
+      }
+    }
+
+    expect(Dog.prototype.getBreed).to.be.a("function");
+    expect(Dog.prototype.getName).to.be.a("function");
+    expect(Dog.prototype.constructor).to.equal(Dog);
+    expect(Dog.prototype.getName).to.equal(Pet.prototype.getName);
+  });
 });
