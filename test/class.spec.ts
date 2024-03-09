@@ -34,6 +34,28 @@ describe("Class", function (this: Mocha.Suite) {
     expect(p.name).to.equal("abc");
   });
 
+  it("private properties", () => {
+    // # sign
+    class Animal {
+      #name: string;
+      constructor(name: string) {
+        this.#name = name;
+      }
+
+      getName() {
+        return this.#name;
+      }
+    }
+
+    const a = new Animal("abc");
+    // This is not possible:
+    //  Property '#name' is not accessible outside class 'Animal' because it has a private identifier. (tsserver 2341)
+    //  Property '#name' is private and only accessible within class 'Animal'. (tsserver 18013)
+    //  console.log(a.#name);
+
+    expect(a.getName()).to.equal("abc");
+  });
+
   it("instanceof", () => {
     class Mammal {}
     class Animal extends Mammal {}
