@@ -110,4 +110,32 @@ describe("Async", function (this: Mocha.Suite) {
       }
     });
   });
+
+  it("promisification", async () => {
+    const setTimeoutPromise = (ms: number) => {
+      return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+      });
+    };
+
+    const start = Date.now();
+    await setTimeoutPromise(10);
+    const end = Date.now();
+    expect(end - start).to.be.greaterThan(5);
+  });
+
+  // https://javascript.info/promisify
+  it("promisify", async () => {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const fs = require("fs");
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const { promisify } = require("util");
+
+    // fs.readFile(filePath, { encoding: 'utf8' }, (err, data) => { ... });
+    const readFile = promisify(fs.readFile);
+
+    const file = "package.json";
+    const data = await readFile(file, "utf8");
+    expect(data).to.be.a("string");
+  });
 });
