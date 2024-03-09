@@ -126,10 +126,8 @@ describe("Async", function (this: Mocha.Suite) {
 
   // https://javascript.info/promisify
   it("promisify", async () => {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const fs = require("fs");
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { promisify } = require("util");
+    const fs = await import("fs");
+    const { promisify } = await import("util");
 
     // fs.readFile(filePath, { encoding: 'utf8' }, (err, data) => { ... });
     const readFile = promisify(fs.readFile);
