@@ -57,6 +57,44 @@ describe("yjs update", function (this: Mocha.Suite) {
     expect(ytext1.toString()).to.equal("Hola Mundo Hallo Welt Hello World");
   });
 
+  it("should sync with remote doc with applyUpdate and encodeStateAsUpdate - map", () => {
+    const ydoc1 = new YDoc();
+    const ydoc2 = new YDoc();
+
+    const ymap1 = ydoc1.getMap("map");
+    const ymap2 = ydoc2.getMap("map");
+
+    ydoc1.on("update", (update) => {
+      applyUpdate(ydoc2, update);
+    });
+
+    ymap1.set("key", "value");
+
+    expect(ymap1.get("key")).to.equal(ymap2.get("key"));
+    expect(ymap2.get("key")).to.equal("value");
+
+    ymap2.set("key", "value2");
+
+    expect(ymap1.get("key")).to.not.equal(ymap2.get("key"));
+    expect(ymap1.get("key")).to.equal("value");
+    expect(ymap2.get("key")).to.equal("value2");
+
+    ydoc2.on("update", (update) => {
+      applyUpdate(ydoc1, update);
+    });
+
+    ymap2.set("key", "value3");
+
+    expect(ymap1.get("key")).to.not.equal(ymap2.get("key"));
+    expect(ymap1.get("key")).to.equal("value");
+    expect(ymap2.get("key")).to.equal("value3");
+
+    applyUpdate(ydoc1, encodeStateAsUpdate(ydoc2));
+
+    expect(ymap1.get("key")).to.equal(ymap2.get("key"));
+    expect(ymap1.get("key")).to.equal("value3");
+  });
+
   it("should sync with remote doc with applyUpdate with state vector", () => {
     const ydoc1 = new YDoc();
     const ydoc2 = new YDoc();
